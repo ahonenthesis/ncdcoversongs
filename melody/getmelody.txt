@@ -1,0 +1,36 @@
+Käännöskomento:
+
+gcc -std=c99 getmelody.c -lm -lfftw3 -o getmelody -O2
+
+Käyttö:
+
+./getmelody musa.wav M A E B G
+
+Melodia haetaan tiedostosta musa.wav (44100 Hz, mono).
+
+Tulostaa rivejä, joissa on aika-arvo ja melodian nuotti (MIDI-numerona).
+
+M melodian hakutapa:
+    1 = vahva melodia
+    2 = korkea melodia
+    3 = tutti-melodia
+
+Muut parametrit selitetty paperissa orch.pdf:
+    A alfa
+    E eMAX
+    B beta
+    G gamma
+
+Esimerkkejä:
+
+Vahva melodia: 
+
+./getmelody musa.wav 1 1 30 0 0
+
+Korkea melodia:
+
+./getmelody musa.wav 2 5 50 1.7 0.1
+
+Tutti-melodia:
+
+./getmelody musa.wav 3 4 55 0.6 0.02

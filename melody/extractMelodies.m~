@@ -1,0 +1,27 @@
+% 
+function [melodyList] = extractMelodies(fileList,outputDir)
+
+if (~exist(outputDir,'dir'))
+    mkdir(outputDir);
+end
+
+tl=textread(fileList,'%s');
+D=dir(fileList);
+lname=D.name;
+melodyList=strcat(outputDir,lname)
+
+fid=fopen(melodyList,'w');
+
+for ix=1:length(tl)
+    tl{ix}
+    com=['./getmelody16K',' ',tl{ix},' 1 1 30 0 0']; % FIX as global
+    [~,bb]=system(com);
+    seq=str2num(bb);
+    savefile=strcat(outputDir,fnhelper(tl{ix}),'mat');
+    save(savefile,'seq');
+    fprintf(fid,'%s\n',savefile);
+end
+
+fclose(fid);
+
+end
