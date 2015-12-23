@@ -1,0 +1,26 @@
+% Produces an internal multiplication to the sequences similarly 
+function [newList] = multiplicateSequences(seqList,outputDir,m,tau)
+
+if (~exist(outputDir,'dir'))
+    mkdir(outputDir);
+end
+
+tl=textread(seqList,'%s');
+D=dir(seqList);
+lname=D.name;
+newList=strcat(outputDir,lname);
+
+fid=fopen(newList,'w');
+
+for ix=1:length(tl)
+    foo=load(tl{ix});
+    D=dir(tl{ix});
+    savefile=strcat(outputDir,D.name);
+    seq=embedder(foo.seq,m,tau);
+    save(savefile,'seq');
+    fprintf(fid,'%s\n',savefile);
+end
+
+fclose(fid);
+
+end
