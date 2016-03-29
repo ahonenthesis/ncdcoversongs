@@ -1,9 +1,7 @@
-This is a work-in-progress repository for the electronic appendix of my PhD thesis "Cover Song Identification Using Compression-based Distance Measures". I am tidying up and documenting the source codes, but there is still some work left to be done.
+This is a work-in-progress repository for the electronic appendix of my PhD thesis "Cover Song Identification Using Compression-based Distance Measures". I am tidying up and documenting the source codes, but there is still some work left to be done. I am also building a more convenient wrapper/ framework for the codes, and it will be available before my dissertation on April 2016. Currently, running the experiments might need a little guidance. If you wish to run some experiments but are not sure how to, please do not hesitate to contact me.
 
-Currently, all the distance matrices for the evaluations in Chapters 5 & 6 are available in directory "results". Some code is still under cleaning, and the data files are not yet added due to the fact that there are so many of them. I will do my best to have everything ready (including decent readme and license files) by the end of 2015.
-
-If you wish to run some evaluations before that, or you have something to ask about the code, please do not hesitate to contact me: teahonen@cs.helsinki.fi
+Currently, all experiments of the thesis should be reproducable with this code, and all data and result files should be present. If you notice something missing, please let me know.
 
 Regards,
+teahonen@cs.helsinki.fi
 
---teppo e. ahonen
