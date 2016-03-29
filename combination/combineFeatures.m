@@ -1,4 +1,12 @@
+% Creates tuples from a pair of chord and melody values.
+%
+% input:
+% chords - a chord sequence
+% melody - a melody sequence
+% comst  - the tuple choice (see thesis)
 function [tupleSeq] = combineFeatures(chords,melody,comst)
+
+% TODO a more through code commenting required
 
 tupletable=[];
 alpsize=0;

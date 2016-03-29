@@ -1,3 +1,9 @@
+% Creates a combined representation from two files.
+%
+% input:
+% file1, file2 - files to be combined
+% newName      - the name of the combined file
+% comst        - concatenate (1) or merge (other), no default value
 function combineRepresentations(file1,file2,newName,comst)
 
 f1=textread(file1,'%s');

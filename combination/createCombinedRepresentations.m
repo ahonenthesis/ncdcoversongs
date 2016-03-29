@@ -1,18 +1,24 @@
+% Creates combined representations from chord and melody data.
+%
+% input:
+% seqList   - a list of pieces to be combined
+% chordDir  - the directory of the chord .txt files
+% melodyDir - the directory of the melody .txt files
+% outputDir - the directory where to write the combined representations 
+% comst     - concatenation (1) or merge (other), no default value 
 function createCombinedRepresentations(seqList,chordDir,melodyDir,outputDir,comst)
+% FIXME input sanity check required
 
 if (~exist(outputDir,'dir'))
     mkdir(outputDir);
 end
 
 tl=textread(seqList,'%s');
-%tl2=textread(melodyList,'%s');
 
-for ix=1:length(tl)
-    tl{ix}
-    %foo=load(tl{ix});
+for ix=1:length(tl)    
     D=dir(tl{ix});
     lname=strrep(D.name,'.mat','.txt');
-    %foobar=load(tl2{ix});
+    % transpositions
     for jx=0:11
         iname1=strcat(chordDir,lname,'.',num2str(jx));
         iname2=strcat(melodyDir,lname,'.',num2str(jx));
