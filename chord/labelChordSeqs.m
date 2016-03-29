@@ -6,7 +6,7 @@
 % outputDir - directory where the sequence representations will be saved
 % lex       - chord lexicon size, i.e. 12 or 24 chords (default 24)
 function labelChordSeqs(seqList,outputDir,lex)
-
+%tic
 if (~exist(outputDir,'dir'))
     mkdir(outputDir);
 end
@@ -44,5 +44,5 @@ for ix=1:length(tl)
         textWriter(char(chordNames(tseq))',strcat(outputDir,lname,'.',num2str(jx)));
     end
 end
-
+%toc
 end

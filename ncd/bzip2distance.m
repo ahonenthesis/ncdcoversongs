@@ -1,5 +1,5 @@
-function [ncdist] = bzip2dist(file1,file2,tempdir)
-
+function [ncdist] = bzip2distance(file1,file2,tdir)
+tic
 comm='bzip2 -k';
 suf='.bz2';
 
@@ -21,7 +21,7 @@ end
 
 % concatenate files and write, if necessary
 d3name=strcat(tdir,d1.name,'_',d2.name);
-d3c=strcat(d3name,suf{comp});
+d3c=strcat(d3name,suf);
 if ~exist(d3c)
     ccom=['cat ',file1,' >> ' d3name];
     system(ccom);
@@ -39,16 +39,17 @@ end
 % FIXAILES TÄSTÄ TOTA NOIN!
 
 if ~exist(d3c)
-    com3=[comm{comp},' ',d3c,' ',d3name,' ','>/dev/null'];
+    com3=[comm,' ',d3c,' ',d3name,' ','>/dev/null'];
     system(com3);
 end
 
-f1c=dir(d1c);
-f2c=dir(d2c);
-f3c=dir(d3c);
+f1c=dir(d1c)
+f2c=dir(d2c)
+f3c=dir(d3c)
 
 xy=f3c.bytes;
 x=min(f1c.bytes,f2c.bytes);
 y=max(f1c.bytes,f2c.bytes);
 
 ncd=(xy-x)/y;
+toc

@@ -7,7 +7,7 @@
 % outputfile - where the m*n*k OTI matrix will be stored
 % k          - number of most likely OTI values to be calculated (default 1)
 function calculateOTImat(qlist,tlist,outputfile,k)
-
+tic
 ql=textread(qlist,'%s');
 tl=textread(tlist,'%s');
 
@@ -30,5 +30,5 @@ for ix=1:qlen
 end
 
 save(outputfile,'tposes');
-
+toc
 end

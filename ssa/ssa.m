@@ -2,13 +2,13 @@
 % quantification for cover song identification" by Serra et al.
 %
 % input:
-%
-% output:
+% target     - list of target chroma files
+% query      - list of query chroma files
+% outputfile - the distance matrix file name
+% tpmat      - pre-calculated transposition matrix
 %
 function ssa(target, query, outputfile, matdir, tpmat,sza)
-% FIX SZA parameterzation!
-% tarkista millä arvoilla on laskettu ja sillai!
-% input ja output dokumentit sitten jostain toisesta systeemista
+
 tic
 
 tl = textread(target,'%s');
@@ -38,8 +38,11 @@ for ix=1:qlen
         for kx=1:klen
             otivalue=tposes(ix,jx,kx);
             ttdata=circshift(tdata,otivalue);
-            kdist=ssadist(qdata,ttdata,9,1,0.1,0.5,0.5,false); % SSA
-            %kdist=ssadist(qdata,ttdata,9,1,0.1,0.5,0.5,true); % SZA
+            if (sza) 
+                kdist=ssadist(qdata,ttdata,9,1,0.1,0.5,0.5,true); % SZA
+            else
+                kdist=ssadist(qdata,ttdata,9,1,0.1,0.5,0.5,false); % SSA
+            end
             if (kdist<dvalue)
                 dvalue=kdist;
             end
