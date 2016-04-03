@@ -3,7 +3,7 @@ config files as needed.
 
 Currently, all experiments of the thesis should be reproducable with this code, and all data and result files should be present. If you notice something missing, please let me know. What you are most likely looking for are the chromagram data. They are under data/*k_chromas, where the *k is the lenght of the window (2k = 2048 samples = 0.0464 seconds, and so on). Each chromagram is stored into an individual file.
 
-Please do not hesitate to call if you have something to ask or problems running the evaluations.
+Please do not hesitate to contact if you have something to ask or problems running the evaluations.
 
 Regards,
 teahonen@cs.helsinki.fi
