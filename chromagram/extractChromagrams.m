@@ -52,10 +52,12 @@ end
 
 for ix=1:length(tl)
     tl{ix}
-    mirc=mirchromagram(tl{ix},'Frame',flen,hsize,'Min',mi,'Max',ma,'Res',res);
-    data=mirgetdata(mirc);
     savefile=strcat(outputDir,filenamehelper(tl{ix}),'mat');
-    save(savefile,'data');
+    if ~(exist(savefile,'file'))
+        mirc=mirchromagram(tl{ix},'Frame',flen,hsize,'Min',mi,'Max',ma,'Res',res);
+        data=mirgetdata(mirc);    
+        save(savefile,'data');
+    end
     fprintf(fid,'%s\n',savefile);
 end
 

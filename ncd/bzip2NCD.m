@@ -9,7 +9,7 @@
 % outputFile   - file name for the distance matrix
 %
 function bzip2NCD(targetList, queryList, seqdir, otimat, tdir, outputFile)
-% FIX parametritsekki ja vaikka viddu mitä...
+
 tic
 tl = textread(targetList,'%s');
 ql = textread(queryList,'%s');

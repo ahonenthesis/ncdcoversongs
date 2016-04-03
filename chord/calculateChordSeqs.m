@@ -37,8 +37,10 @@ if (lex==24)
         foo=load(tl{ix});
         D=dir(tl{ix});
         savefile=strcat(outputDir,D.name);
-        seq=hmmChords(foo.data,prior24,trans24,mu24,Sigma24);
-        save(savefile,'seq');
+        if ~(exist(savefile,'file'))
+            seq=hmmChords(foo.data,prior24,trans24,mu24,Sigma24);
+            save(savefile,'seq');
+        end
         fprintf(fid,'%s\n',savefile);
     end
 elseif (lex==12)
@@ -48,10 +50,12 @@ elseif (lex==12)
     load Sigma12
     for ix=1:length(tl)
         foo=load(tl{ix});
-        D=dir(tl{ix});
+        D=dir(tl{ix});        
         savefile=strcat(outputDir,D.name);
-        seq=hmmChords(foo.data,prior12,trans12,mu12,Sigma12);
-        save(savefile,'seq');
+        if ~(exist(savefile,'file'))
+            seq=hmmChords(foo.data,prior12,trans12,mu12,Sigma12);
+            save(savefile,'seq');
+        end
         fprintf(fid,'%s\n',savefile);
     end
 else

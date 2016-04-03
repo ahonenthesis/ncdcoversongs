@@ -31,17 +31,19 @@ end
 for ix=1:length(tl)
     foo=load(tl{ix});
     D=dir(tl{ix});
-    lname=strrep(D.name,'.mat','.txt');    
-    % key transpositions
-    for jx=0:11
-        if (lex==24)
-            tseq=mod(foo.seq+2*jx,24);
-            tseq(find(tseq==0))=24;
-        else
-            tseq=mod(foo.seq+jx,12);
-            tseq(find(tseq==0))=12;
+    lname=strrep(D.name,'.mat','.txt');
+    if ~(exist(strcat(outputDir,lname,'.',num2str(0)),'file')) % write only if needed
+        % key transpositions
+        for jx=0:11
+            if (lex==24)
+                tseq=mod(foo.seq+2*jx,24);
+                tseq(find(tseq==0))=24;
+            else
+                tseq=mod(foo.seq+jx,12);
+                tseq(find(tseq==0))=12;
+            end
+            textWriter(char(chordNames(tseq))',strcat(outputDir,lname,'.',num2str(jx)));
         end
-        textWriter(char(chordNames(tseq))',strcat(outputDir,lname,'.',num2str(jx)));
     end
 end
 %toc
