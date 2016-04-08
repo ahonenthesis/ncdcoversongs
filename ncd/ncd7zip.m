@@ -1,9 +1,6 @@
-%
-% ~
-% :--------------------------------------------------------------------DD
+% 7zip-based NCD calculator, mainly for ppm but supports bzip2 and gzip
+% too. More detailed instructions to appear one day...
 function [ncd] = ncd7zip(file1,file2,tdir,comp)
-
-% FIX a shitload! :--------------------D
 
 comm={
     '7z a -bd -t7z -m0=lzma',... % -m here redundant

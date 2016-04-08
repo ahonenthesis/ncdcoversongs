@@ -1,57 +1,47 @@
-function [ncdist] = gzipdistance(file1,file2,tempdir)
-
-% FIX polut ja everything
+% Similar to bzip2distance. These should be merged...
+function [ncdist] = gzipdistance(file1,file2,tdir)
 
 suf='.gz';
 
-%fn1=strcat(file1,suf);
-fn1=strcat(tempdir,file1(8:end),suf);
-if (~exist(fn1))
-    copyfile(file1,strcat(tempdir,file1(8:end)));
-    gzip(strcat(tempdir,file1(8:end)));
-    %com1 = ['bzip2 -k',' ',file1];
-    %com1 = ['bzip2 -k',' ',tempdir,file1];
-    %system(com1);
+
+% first file, compress if needed
+d1=dir(file1);
+d1c=strcat(tdir,d1.name,suf);
+if ~exist(d1c)
+    copyfile(file1,tdir);
+    gzip(strcat(tdir,d1.name));
 end
-A=dir(fn1);
-len1=A.bytes;
 
-%fn2=strcat(file2,suf);
-fn2=strcat(tempdir,file2(8:end),suf);
-if (~exist(fn2))
-    copyfile(file2,strcat(tempdir,file2(8:end)));
-    gzip(strcat(tempdir,file2(8:end)));
-    %com2 = ['bzip2 -k',' ',file2];    
-    %com2 = ['bzip2 -k',' ',tempdir,file2]
-    %system(com2);
+% second file, same thing
+d2=dir(file2);
+d2c=strcat(tdir,d2.name,suf);
+if ~exist(d2c)
+    copyfile(file2,tdir);
+    gzip(strcat(tdir,d2.name));
 end
-B=dir(fn2);
-len2=B.bytes;
 
-%D=dir(file1);
-D=dir(fn1);
-f1=D.name;
-%E=dir(file2);
-E=dir(fn2);
-f2=E.name;
-
-%file3=strcat(tempdir,f1,'_',f2);
-file3=strcat(tempdir,file1(8:end),'_',file2(8:end));
-fn3=strcat(file3,suf);
-if (~exist(fn3)) % concatenation
-    aa=textread(file1,'%c')';  
-    %aa=textread(strcat(tempdir,file1),'%c')';
-    bb=textread(file2,'%c')';
-    %bb=textread(strcat(tempdir,file2),'%c')';
-    aabb=[aa bb];
-    twrite(aabb,file3);  
-    gzip(file3);
-    %com3 = ['bzip2 -k',' ',file3];
-    %system(com3);
+% concatenate files and write, if necessary
+d3name=strcat(tdir,d1.name,'_',d2.name);
+d3c=strcat(d3name,suf);
+if ~exist(d3c)
+    ccom=['cat ',file1,' >> ' d3name];
+    system(ccom);
+    ccom=['cat ',file2,' >> ' d3name];
+    system(ccom);
 end
-C=dir(fn3);
-len3=C.bytes;
+% ...and compress if needed
+if ~exist(d3c)
+    gzip(d3name);
+end
 
-ncdist = (len3-min(len1,len2))/max(len1,len2);
+f1c=dir(d1c);
+f2c=dir(d2c);
+f3c=dir(d3c);
+
+xy=f3c.bytes;
+x=min(f1c.bytes,f2c.bytes);
+y=max(f1c.bytes,f2c.bytes);
+
+ncdist=(xy-x)/y;
 
 end

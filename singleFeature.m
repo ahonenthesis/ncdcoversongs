@@ -42,7 +42,8 @@ end
 % Finally, the computation of distances. Here, we use bzip2 -- this will
 % more paramized in the near future.
 bzip2NCD(tchromas, qchromas, strcat(outputDirectory,crparams.sdir), strcat(outputDirectory,kiparams.ofile), scratchDirectory, resultFile);
-
+%gzipNCD(tchromas, qchromas, strcat(outputDirectory,crparams.sdir), strcat(outputDirectory,kiparams.ofile), scratchDirectory, resultFile);
+%ppmNCD(tchromas, qchromas, strcat(outputDirectory,crparams.sdir), strcat(outputDirectory,kiparams.ofile), scratchDirectory, resultFile);
 % And after the matrix is complete, we can now evaluate the performance.
 
 % ...
