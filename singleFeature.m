@@ -44,8 +44,16 @@ end
 bzip2NCD(tchromas, qchromas, strcat(outputDirectory,crparams.sdir), strcat(outputDirectory,kiparams.ofile), scratchDirectory, resultFile);
 %gzipNCD(tchromas, qchromas, strcat(outputDirectory,crparams.sdir), strcat(outputDirectory,kiparams.ofile), scratchDirectory, resultFile);
 %ppmNCD(tchromas, qchromas, strcat(outputDirectory,crparams.sdir), strcat(outputDirectory,kiparams.ofile), scratchDirectory, resultFile);
-% And after the matrix is complete, we can now evaluate the performance.
 
-% ...
+% And after the matrix is complete, we can now evaluate the performance.
+evparams = evalConfig;
+distmat = load(evparams.dmat);
+cranks = readRanks(evparams.rankf);
+[map,mrr] = calculateResults(distmat,cranks,evparams.desc);
+% if you wish to calculate just Mix330, do this. I'll try to make this
+% something more convenient...
+%[map,mrr] = calculateResults(distmat(1:330,1:330,cranks,evparams.descend);
+
+['MAP: ',num2str(map),' MRR: ',num2str(mrr)]
 
 end

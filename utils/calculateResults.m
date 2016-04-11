@@ -1,15 +1,26 @@
-% calculates MAP and MRR from distance matrix
-% needs a lot of cleaning, but works
-function [meanOfAveP,meanRecRank]=calculateResults(data,corrects,descend)
+% Calculates Mean of Average Precisions and Mean Reciprocal Ranks from a
+% distance matrix, given a list of the correct target indices for all
+% queries.
+% 
+% input:
+% dmat     - distance (or similarity) matrix
+% corrects - correct target indices for all query (see ranks_1k.txt for example)
+% descend  - true if you wish to calculate from a similarity matrix,
+% default false
+%
+% output:
+% meanOfAveP  - mean of average precisions
+% meanRecRank - mean reciprocal rank
+function [meanOfAveP,meanRecRank]=calculateResults(dmat,corrects,descend)
 
 if (nargin<3)
     descend=false;
 end
 
 if (descend)
-    [~,bb]=sort(data,2,'descend');
+    [~,bb]=sort(dmat,2,'descend');
 else
-    [~,bb]=sort(data,2);
+    [~,bb]=sort(dmat,2);
 end
 
 
