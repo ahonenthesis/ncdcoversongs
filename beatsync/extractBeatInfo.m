@@ -22,10 +22,12 @@ fid=fopen(beatList,'w');
 
 for ix=1:length(tl)
     tl{ix}    
-    [wav,fs]=wavread(tl{ix}); % FIX check if mono
-    beats=beat(wav,fs);
     savefile=strcat(outputDir,filenamehelper(tl{ix}),'mat');
-    save(savefile,'beats');
+    if ~(exist(savefile,'file'))
+        [wav,fs]=wavread(tl{ix}); % FIX check if mono
+        beats=beat(wav,fs);
+        save(savefile,'beats');
+    end
     fprintf(fid,'%s\n',savefile);
 end
 

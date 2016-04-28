@@ -27,13 +27,16 @@ bl = textread(beatList,'%s');
 fid=fopen(beatChromaList,'w');
 
 for ix=1:length(tl)
+    tl{ix}
     foo=load(tl{ix});
     D=dir(tl{ix});
     savefile=strcat(outputDir,D.name);
-    baz=load(bl{ix});
-    data=beatavg(foo.data,baz.beats*4); % FIXME hard coded!
-    data=chromagramNormalizer(data);
-    save(savefile,'data');
+    if ~(exist(savefile,'file'))
+        baz=load(bl{ix});
+        data=beatavg(foo.data,baz.beats*2); % FIXME hard coded!
+        data=chromagramNormalizer(data);
+        save(savefile,'data');
+    end
     fprintf(fid,'%s\n',savefile);
 end
 

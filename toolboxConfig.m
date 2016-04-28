@@ -18,4 +18,9 @@ hmmpath = '/home/teahonen/oldstuff/HMMall/';
 % add to the path
 addpath(genpath(hmmpath));
 
+% Ellis et al system for beat synchronization
+beatpath = '/home/teahonen/oldstuff/coversongs/';
+% add to the path
+addpath(genpath(beatpath));
+
 end
