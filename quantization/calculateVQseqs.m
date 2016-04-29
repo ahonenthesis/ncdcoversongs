@@ -28,8 +28,10 @@ for ix=1:length(tl)
     foo=load(tl{ix});
     D=dir(tl{ix});
     savefile=strcat(outputDir,D.name);
-    seq=kmeans(foo.data',vqdim,'Start',vqcents,'MaxIter',1);
-    save(savefile,'seq');
+    if ~(exist(savefile,'file'))
+        seq=kmeans(foo.data',vqdim,'Start',vqcents,'MaxIter',1);
+        save(savefile,'seq');
+    end
     fprintf(fid,'%s\n',savefile);
 end
 

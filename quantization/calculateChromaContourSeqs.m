@@ -23,13 +23,15 @@ for ix=1:length(tl)
     foo=load(tl{ix});
     D=dir(tl{ix});
     savefile=strcat(outputDir,D.name);
-    data=foo.data;
-    gdata=sum(data,2)/max(sum(data,2));
-    seq=zeros(1,size(data,2));
-    for jx=1:size(data,2)
-        seq(jx)=koti(gdata,data(:,jx),1);
-    end    
-    save(savefile,'seq');
+    if ~(exist(savefile,'file'))
+        data=foo.data;
+        gdata=sum(data,2)/max(sum(data,2));
+        seq=zeros(1,size(data,2));
+        for jx=1:size(data,2)
+            seq(jx)=koti(gdata,data(:,jx),1);
+        end
+        save(savefile,'seq');
+    end
     fprintf(fid,'%s\n',savefile);
 end
 

@@ -23,9 +23,11 @@ for ix=1:length(tl)
     foo=load(tl{ix});
     D=dir(tl{ix});
     savefile=strcat(outputDir,D.name);
-    data=double(foo.data>thre);
-    %data=bin2dec(num2str(data')); % this is done in seq labeling now
-    save(savefile,'data');
+    if ~(exist(savefile,'file'))
+        data=double(foo.data>thre);
+        seq=bin2dec(num2str(data'));
+        save(savefile,'seq');
+    end
     fprintf(fid,'%s\n',savefile);
 end
 

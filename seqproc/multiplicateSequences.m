@@ -1,4 +1,4 @@
-% Produces an internal multiplication to the sequences with parameters
+% Produces an internal duplication to the sequences with parameters
 % similarly as in time series embedding.
 % input:
 % seqList    - text file with a list of chord sequences .mat files
@@ -23,12 +23,14 @@ seqList2=strcat(outputDir,lname);
 
 fid=fopen(seqList2,'w');
 
-for ix=1:length(tl)
-    foo=load(tl{ix});
+for ix=1:length(tl)    
     D=dir(tl{ix});
     savefile=strcat(outputDir,D.name);
-    seq=interMulti(foo.seq,m,tau);
-    save(savefile,'seq');
+    if ~(exist(savefile,'file'))
+        foo=load(tl{ix});
+        seq=interMulti(foo.seq,m,tau);
+        save(savefile,'seq');
+    end
     fprintf(fid,'%s\n',savefile);
 end
 

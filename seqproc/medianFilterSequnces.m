@@ -22,12 +22,14 @@ seqList2=strcat(outputDir,lname);
 
 fid=fopen(seqList2,'w');
 
-for ix=1:length(tl)
-    foo=load(tl{ix});
+for ix=1:length(tl)    
     D=dir(tl{ix});
     savefile=strcat(outputDir,D.name);
-    seq=medfilt1(foo.seq,mfvalue);
-    save(savefile,'seq');
+    if ~(exist(savefile,'file'))
+        foo=load(tl{ix});
+        seq=medfilt1(foo.seq,mfvalue);
+        save(savefile,'seq');
+    end
     fprintf(fid,'%s\n',savefile);
 end
 
