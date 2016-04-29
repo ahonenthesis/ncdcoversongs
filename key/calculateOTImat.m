@@ -14,25 +14,28 @@ tl=textread(tlist,'%s');
 qlen=size(ql,1);
 tlen=size(tl,1);
 
-tposes=zeros(qlen,tlen,k);
-
-if ~(exist(outputfile,'file'))
-    
-    for ix=1:qlen
-        foo=load(ql{ix});
-        qdata=foo.data;
-        for jx=1:tlen
-            foobar=load(tl{jx});
-            tdata=foobar.data;
-            kotis=koti(qdata,tdata,k);
-            for kx=1:k
-                tposes(ix,jx,kx)=kotis(kx);
+if (k==0)
+    tposes=zeros(qlen,tlen);
+    if ~(exist(outputfile,'file'))
+        save(outputfile,'tposes');
+    end
+else
+    tposes=zeros(qlen,tlen,k);
+    if ~(exist(outputfile,'file'))
+        for ix=1:qlen
+            foo=load(ql{ix});
+            qdata=foo.data;
+            for jx=1:tlen
+                foobar=load(tl{jx});
+                tdata=foobar.data;
+                kotis=koti(qdata,tdata,k);
+                for kx=1:k
+                    tposes(ix,jx,kx)=kotis(kx);
+                end
             end
         end
+        save(outputfile,'tposes');
     end
-    
-    save(outputfile,'tposes');
 end
-
 toc
 end
