@@ -18,14 +18,15 @@ tl=textread(seqList,'%s');
 for ix=1:length(tl)    
     D=dir(tl{ix});
     lname=strrep(D.name,'.mat','.txt');
-    % transpositions
-    for jx=0:11
-        iname1=strcat(chordDir,lname,'.',num2str(jx));
-        iname2=strcat(melodyDir,lname,'.',num2str(jx));
-        oname=strcat(outputDir,lname,'.',num2str(jx));
-        combineRepresentations(iname1,iname2,oname',comst);
+    if ~(exist(strcat(outputDir,lname,'.',num2str(0))))
+        % transpositions
+        for jx=0:11
+            iname1=strcat(chordDir,lname,'.',num2str(jx));
+            iname2=strcat(melodyDir,lname,'.',num2str(jx));
+            oname=strcat(outputDir,lname,'.',num2str(jx));
+            combineRepresentations(iname1,iname2,oname',comst);
+        end
     end
-
 end
 
 end
