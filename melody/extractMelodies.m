@@ -35,11 +35,13 @@ fid=fopen(melodyList,'w');
 
 for ix=1:length(tl)
     tl{ix}
-    com=[comstr,' ',tl{ix},' 1 1 30 0 0']; % FIX as global
-    [~,bb]=system(com);
-    seq=str2num(bb)';
     savefile=strcat(outputDir,filenamehelper(tl{ix}),'mat');
-    save(savefile,'seq');
+    if ~(exist(savefile,'file'))
+        com=[comstr,' ',tl{ix},' 1 1 30 0 0']; % FIX as global
+        [~,bb]=system(com);
+        seq=str2num(bb)';
+        save(savefile,'seq');
+    end
     fprintf(fid,'%s\n',savefile);
 end
 
